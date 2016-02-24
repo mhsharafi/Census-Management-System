@@ -7,12 +7,13 @@ public class Main {
     public static void main(String[] args)
     {
         //File Address
-        String address = "E:\\sharif\\term 8\\lab SE\\Data\\WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
+        String address = "Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
         ExcelReader er = new ExcelReader(address);
         int res = er.getPopulation("Djibouti",1952);
         System.out.println(res);
         er.setPopulation("Djibouti", 1952, 1.7);
         res = er.getPopulation("Djibouti",1952);
         System.out.println(res);
+        er.createChart("Djibouti",'F');
     }
 }
