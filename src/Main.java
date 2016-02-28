@@ -105,6 +105,7 @@ public class Main {
                                     try {
                                         workbook = new Workbook("Data/chart-year.xlsx");
                                         workbook.save("Data/MyPdfFile.pdf", SaveFormat.PDF);
+                                        System.out.print("success");
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -120,23 +121,23 @@ public class Main {
             }
         }
     }
-    private static ExcelReader getExcelReader(String Gender)
-    {
-        switch (Gender)
-        {
+
+    private static ExcelReader getExcelReader(String Gender) {
+        switch (Gender) {
             case "F":
-                if(female == null)
+                if (female == null)
                     female = new ExcelReader("Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx");
-                return  female;
+                return female;
 
             case "M":
-                if(male == null)
+                if (male == null)
                     male = new ExcelReader("Data/WPP2015_POP_F01_2_TOTAL_POPULATION_MALE.xlsx");
                 return male;
         }
         return null;
     }
-    static ExcelReader female,male;
+
+    static ExcelReader female, male;
 }
 
 
