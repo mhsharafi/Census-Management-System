@@ -50,23 +50,6 @@ public class Main {
                         switch (splitedCommand[0]) {
 
                             case "info":
-                                if (splitedCommand.length > 3) {
-                                    System.out.println("Invalid argument.");
-                                    break;
-                                }
-                                try {
-                                    String country = splitedCommand[1];
-                                    int year = Integer.parseInt(splitedCommand[2]);
-                                    String address = "Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
-                                    ExcelReader er = new ExcelReader(address);
-                                    int res = er.getPopulation(country, year);
-                                    System.out.println(res);
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println("Invalid argument.");
-                                    break;
-                                }
-                            case "set":
                                 if (splitedCommand.length > 4) {
                                     System.out.println("Invalid argument.");
                                     break;
@@ -74,13 +57,56 @@ public class Main {
                                 try {
                                     String country = splitedCommand[1];
                                     int year = Integer.parseInt(splitedCommand[2]);
-                                    double population = Double.parseDouble(splitedCommand[3]);
-                                    String address = "Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
-                                    ExcelReader er = new ExcelReader(address);
+                                    String gender = splitedCommand[3];
+                                    switch (gender) {
+                                        case "F":
+                                            String address = "Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
+                                            ExcelReader er = new ExcelReader(address);
+                                            int res = er.getPopulation(country, year);
+                                            System.out.println(res);
+                                            break;
+                                        case "M":
+                                            address = "Data/WPP2015_POP_F01_2_TOTAL_POPULATION_MALE.xlsx";
+                                            er = new ExcelReader(address);
+                                            res = er.getPopulation(country, year);
+                                            System.out.println(res);
+                                            break;
+                                    }
 
-                                    er.setPopulation(country, year, population);
-                                    int res = er.getPopulation(country, year);
-                                    System.out.println(res);
+
+                                    break;
+                                } catch (Exception e) {
+                                    System.out.println("Invalid argument.");
+                                    break;
+                                }
+                            case "set":
+                                if (splitedCommand.length > 5) {
+                                    System.out.println("Invalid argument.");
+                                    break;
+                                }
+                                try {
+                                    String country = splitedCommand[1];
+                                    int year = Integer.parseInt(splitedCommand[2]);
+                                    double population = Double.parseDouble(splitedCommand[3]);
+                                    String gender = splitedCommand[4];
+                                    switch (gender) {
+                                        case "F":
+                                            String address = "Data/WPP2015_POP_F01_3_TOTAL_POPULATION_FEMALE.xlsx";
+                                            ExcelReader er = new ExcelReader(address);
+
+                                            er.setPopulation(country, year, population);
+                                            int res = er.getPopulation(country, year);
+                                            System.out.println(res);
+                                            break;
+                                        case "M":
+                                            address = "Data/WPP2015_POP_F01_2_TOTAL_POPULATION_MALE.xlsx";
+                                            er = new ExcelReader(address);
+                                            er.setPopulation(country, year, population);
+                                            res = er.getPopulation(country, year);
+                                            System.out.println(res);
+                                            break;
+                                    }
+
                                     break;
                                 } catch (Exception e) {
                                     System.out.println("Invalid argument.");
@@ -108,7 +134,7 @@ public class Main {
                                             }
                                             break;
                                         case "M":
-                                            address = "Data/WPP2015_POP_F01_2_TOTAL_POPULATION_MALE.XLS";
+                                            address = "Data/WPP2015_POP_F01_2_TOTAL_POPULATION_MALE.xlsx";
                                             er = new ExcelReader(address);
                                             er.createChart(country, 'M');
                                             workbook = null;
