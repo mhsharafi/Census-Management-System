@@ -160,7 +160,7 @@ public class ExcelReader {
         //return null;
     }
 
-    public void createChart(String country, char sex) {
+    public void createChart(String country) {
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet("Sheet 1");
         final int NUM_OF_ROWS = 2;
