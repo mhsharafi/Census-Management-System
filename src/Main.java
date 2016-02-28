@@ -8,6 +8,10 @@ import java.awt.*;
 import java.io.File;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.Writer;
+
 
 /**
  * Created by mohammad hosein on 21/02/2016.
@@ -132,6 +136,28 @@ public class Main {
                 System.out.println();
             }
         }
+    }
+    
+    private static boolean isProtect(String countryName){
+    		File file = new File("src/ui/protectedCountries.txt");
+    		Scanner sc = new Scanner(file);
+    		int flag = 0;
+    		while (sc.hasNext()){
+    			if (countryName.equals(sc.nextLine)){
+    				flag = 1;
+    				break;
+    			}
+    		}
+    		if (flag == 1)
+    			return true;
+    		return false;
+    }
+    
+    private static void setProtect(String CountryName){
+    	Writer output;
+    	output = new BufferedWriter(new FileWriter("src/ui/protectedCountries.txt", true));
+    	output.append(CountryName);
+    	output.close();
     }
 }
 //                            case "deletedoc":
