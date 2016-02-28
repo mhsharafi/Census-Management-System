@@ -163,6 +163,7 @@ public class ExcelReader {
     public void createChart(String country) {
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet("Sheet 1");
+
         final int NUM_OF_ROWS = 2;
         final int NUM_OF_COLUMNS = year2Col.size();
 
@@ -205,7 +206,9 @@ public class ExcelReader {
         ChartDataSource<Number> xs = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(0, 0, 0, NUM_OF_COLUMNS - 1));
         ChartDataSource<Number> ys1 = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 1, 0, NUM_OF_COLUMNS - 1));
         ChartDataSource<Number> ys2 = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(2, 2, 0, NUM_OF_COLUMNS - 1));
-
+        for (int i = 0; i < NUM_OF_COLUMNS; i++) {
+            sheet.autoSizeColumn(i);
+        }
         data.addSerie(xs, ys1);
         data.addSerie(xs, ys2);
         chart.plot(data, bottomAxis, leftAxis);
@@ -214,14 +217,15 @@ public class ExcelReader {
         FileOutputStream fileOut = null;
         try {
             fileOut = new FileOutputStream("Data/chart-year.xlsx");
+
             wb.write(fileOut);
             fileOut.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
     }

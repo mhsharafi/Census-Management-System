@@ -3,11 +3,12 @@ import com.aspose.cells.Workbook;
 import ui.Action;
 
 import java.awt.geom.Arc2D;
+import java.io.*;
 import java.util.Map;
 import java.awt.*;
-import java.io.File;
 import java.util.Scanner;
 import java.util.TreeMap;
+
 
 /**
  * Created by mohammad hosein on 21/02/2016.
@@ -138,6 +139,40 @@ public class Main {
     }
 
     static ExcelReader female, male;
+
+
+    private static boolean isProtect(String countryName) {
+        File file = new File("src/ui/protectedCountries.txt");
+        Scanner sc = null;
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int flag = 0;
+        while (sc.hasNext()) {
+            if (countryName.equals(sc.nextLine())) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+            return true;
+        return false;
+    }
+
+    private static void setProtect(String CountryName) {
+        Writer output;
+        try {
+            output = new BufferedWriter(new FileWriter("src/ui/protectedCountries.txt", true));
+            output.append(CountryName);
+            output.close();
+        } catch (Exception e) {
+
+        }
+
+    }
+
 }
 
 
