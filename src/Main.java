@@ -75,7 +75,12 @@ public class Main {
                                     break;
                                 }
                                 try {
+                                	
                                     String country = splitedCommand[1];
+                                    if (isProtect(country)){
+                                    	System.out.println("The country is protected.");
+                                    	break;
+                                    }
                                     int year = Integer.parseInt(splitedCommand[2]);
                                     double population = Double.parseDouble(splitedCommand[3]);
                                     String gender = splitedCommand[4];
@@ -115,6 +120,18 @@ public class Main {
                                     System.out.println("Invalid argument.");
                                     break;
                                 }
+                            case "protect":
+                            	if (splitedCommand.length != 2){
+                            		System.out.println("Invalid argument.");
+                                    break;
+                            	}
+                            	try{
+                            		String country = splitedCommand[1];
+                            		setProtect(country);
+                            	} catch (Exception e){
+                            		System.out.println("Invalid argument.");
+                                    break;
+                            	}
                         }
                 }
             } catch (Exception e) {
@@ -136,9 +153,12 @@ public class Main {
                 return male;
         }
         return null;
+
     }
 
     static ExcelReader female, male;
+
+
 
 
     private static boolean isProtect(String countryName) {
